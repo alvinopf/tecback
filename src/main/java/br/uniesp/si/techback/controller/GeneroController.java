@@ -1,48 +1,48 @@
 package br.uniesp.si.techback.controller;
 
 import br.uniesp.si.techback.model.Filme;
+import br.uniesp.si.techback.model.Genero;
 import br.uniesp.si.techback.service.FilmeService;
+import br.uniesp.si.techback.service.GeneroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/filmes")
+@RequestMapping("/genero")
 @RequiredArgsConstructor
-public class FilmeController {
+public class GeneroController {
 
-    private final FilmeService filmeService;
+    private final GeneroService generoService;
 
     @GetMapping
-    public List<Filme> listar() {
-        return filmeService.listar();
+    public List<Genero> listar() {
+        return generoService.listar();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Filme> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Genero> buscarPorId(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(filmeService.buscarPorId(id));
+            return ResponseEntity.ok(generoService.buscarPorId(id));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<Filme> criar(@Valid @RequestBody Filme filme) {
-        Filme filmeSalvo = filmeService.salvar(filme);
-        return ResponseEntity.ok(filmeSalvo);
+    public ResponseEntity<Genero> criar(@Valid @RequestBody Genero genero) {
+        Genero generoSalvo = generoService.salvar(genero);
+        return ResponseEntity.ok(generoSalvo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Filme> atualizar(@PathVariable Long id, @Valid @RequestBody Filme filme) {
+    public ResponseEntity<Genero> atualizar(@PathVariable Long id, @Valid @RequestBody Genero genero) {
         try {
-            Filme filmeAtualizado = filmeService.atualizar(id, filme);
-            return ResponseEntity.ok(filmeAtualizado);
+            Genero generoAtualizado = generoService.atualizar(id, genero);
+            return ResponseEntity.ok(generoAtualizado);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
@@ -51,10 +51,11 @@ public class FilmeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         try {
-            filmeService.excluir(id);
+            generoService.excluir(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

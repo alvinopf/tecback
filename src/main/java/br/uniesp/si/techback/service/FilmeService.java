@@ -27,7 +27,7 @@ public class FilmeService {
      */
     public Filme buscarPorId(Long id) {
         return filmeRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Filme n o encontrado com o ID: " + id));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Filme não encontrado com o ID: " + id));
     }
 
     /**
